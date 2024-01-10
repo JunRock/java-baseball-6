@@ -1,13 +1,12 @@
 package player;
 
 import camp.nextstep.edu.missionutils.Console;
+import writer.InputNumber;
 
 public class PrintMessage {
     private static final String START_MESSAGE = "숫자 야구 게임을 시작합니다.";
-    public String write(){
-        String userNumber = Console.readLine();
-        return userNumber;
-    }
+    private final InputNumber inputNumber;
+
     public void read(){
         System.out.println(START_MESSAGE);
     }
