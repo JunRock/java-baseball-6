@@ -1,14 +1,14 @@
 package domain.ballnumber;
 
-import com.sun.nio.sctp.SctpStandardSocketOptions;
-
-import static utils.view.OutputView.*;
+import static config.exception.ErrorStatus.NOT_EXIST_TYPE;
+import static config.status.Condition.MIN_NUMBER;
+import static config.status.Condition.STRIKE_COUNT;
+import static config.status.Message.*;
 
 public class Result {
     private int strikeCount;
     private int ballCount;
-    private final static int STRIKE_COUNT = 3;
-    private final static String NOT_EXIST_TYPE="존재하지 않는 타입입니다";
+
 
     public Result(int strikeCount, int ballCount) {
         this.strikeCount = strikeCount;
@@ -17,19 +17,19 @@ public class Result {
 
     public String showResult(int strikeCount, int ballCount) {
         if (isFullStrike()) {
-            return String.format("%d" + STRIKE,strikeCount);
+            return String.format("%d" + STRIKE, strikeCount);
         }
         if (isNothing()) {
             return String.format(NOTHING);
         }
         if (hasStrikeAndBall()) {
-            return String.format("%d" + BALL + " " + "%d" + STRIKE,ballCount,strikeCount) ;
+            return String.format("%d" + BALL + " " + "%d" + STRIKE, ballCount, strikeCount);
         }
         if (isNoStrike()) {
-            return String.format("%d"+BALL,ballCount);
+            return String.format("%d" + BALL, ballCount);
         }
         if (isNoBall()) {
-            return String.format("%d"+strikeCount+STRIKE,strikeCount);
+            return String.format("%d" + strikeCount + STRIKE, strikeCount);
         }
         throw new IllegalArgumentException(NOT_EXIST_TYPE);
     }
@@ -40,18 +40,18 @@ public class Result {
     }
 
     public boolean isNothing() {
-        return strikeCount <= 0 && ballCount <= 0;
+        return strikeCount <= MIN_NUMBER && ballCount <= MIN_NUMBER;
     }
 
     public boolean hasStrikeAndBall() {
-        return strikeCount >= 0 && ballCount >= 0;
+        return strikeCount >= MIN_NUMBER && ballCount >= MIN_NUMBER;
     }
 
     public boolean isNoStrike() {
-        return strikeCount <= 0;
+        return strikeCount <= MIN_NUMBER;
     }
 
     public boolean isNoBall() {
-        return ballCount <= 0;
+        return ballCount <= MIN_NUMBER;
     }
 }
