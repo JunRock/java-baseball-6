@@ -8,18 +8,18 @@ public class CheckNumber { //볼 스트라이크 확인
     private List<Integer> players;
 
     public CheckNumber(List<Integer> computers, List<Integer> player) {
-        this.computers=computers;
+        this.computers = computers;
         this.players = player;
     }
 
     public int getStrike() { //스트라이크 갯수
-       return (int) players.stream()
+        return (int) players.stream()
                 .filter(o -> isStrike(o, players.indexOf(o)))
                 .count();
     }
 
     public int getBall() {  //볼 갯수
-       return (int) players.stream()
+        return (int) players.stream()
                 .filter(o -> isBall(o, players.indexOf(o)))
                 .count();
     }
