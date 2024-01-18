@@ -9,7 +9,7 @@ import utils.view.OutputView;
 
 import java.util.List;
 
-import static config.status.Condition.GAMEOVER;
+import static config.status.BaseballCondition.GAMEOVER;
 import static config.status.Message.*;
 import static domain.player.Player.*;
 
@@ -25,16 +25,16 @@ public class GameController {
         } while (!restartOption().equals(GAMEOVER));
     }
 
-    public static void playGame(List<Integer> computers) {
+    public void playGame(List<Integer> computers) {
         while (true) {
             Player player = new Player();
             OutputView.outputView(INPUT_MESSAGE);
-            List<Integer> players = player.inputNumber();
+            List<Integer> players = player.getNumber();
             CheckNumber checkNumber = new CheckNumber(computers, players);
             Result result = new Result(checkNumber.getStrike(), checkNumber.getBall());
             OutputView.resultView(result.showResult(checkNumber.getStrike(), checkNumber.getBall()));
             if (result.isFullStrike())
-                break;
+                return;
         }
     }
 }

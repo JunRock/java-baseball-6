@@ -1,8 +1,8 @@
 package domain.ballnumber;
 
 import static config.exception.ErrorStatus.NOT_EXIST_TYPE;
-import static config.status.Condition.MIN_NUMBER;
-import static config.status.Condition.STRIKE_COUNT;
+import static config.status.BaseballCondition.MIN_NUMBER;
+import static config.status.BaseballCondition.STRIKE_COUNT;
 import static config.status.Message.*;
 
 public class Result {
@@ -29,7 +29,7 @@ public class Result {
             return String.format("%d" + BALL, ballCount);
         }
         if (isNoBall()) {
-            return String.format("%d" + strikeCount + STRIKE, strikeCount);
+            return String.format("%d" + STRIKE, strikeCount);
         }
         throw new IllegalArgumentException(NOT_EXIST_TYPE);
     }
