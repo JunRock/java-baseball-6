@@ -11,4 +11,7 @@ public class Message {
     public final static String EMPTY_ERROR_MESSAGE = "문자를 입력하지 않았습니다";
     public final static String LENGTH_ERROR_MESSAGE = "입력한 문자가 3개가 아닙니다";
     public final static String DUPLICATE_ERROR_MESSAGE = "중복된 문자를 입력하였습니다";
+
+    private Message() {
+    }
 }

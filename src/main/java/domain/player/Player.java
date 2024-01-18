@@ -3,21 +3,28 @@ package domain.player;
 import utils.view.InputView;
 
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import static config.exception.ErrorStatus.IS_NOT_NUMBER;
-import static config.status.Condition.NUMBER_LENGTH;
+import static config.status.BaseballCondition.NUMBER_LENGTH;
 import static config.status.Message.*;
 
 public class Player {
-    public List<Integer> inputNumber() {
-        String number = InputView.input();
+    public List<Integer> validNumber(String number) {
         validIsNumber(number);
         validIsEmpty(number);
         validLengthOfNumber(number);
         validDuplicateNumber(number);
         return converterInteger(number);
+    }
+
+    public List<Integer> getNumber() {
+        String number = InputView.input();
+        List<Integer> integers = validNumber(number);
+        return integers;
     }
 
     /**
@@ -40,7 +47,7 @@ public class Player {
      * 중복된 숫자를 입력한 경우
      */
     public void validDuplicateNumber(String number) {
-        if (isUserNumber(number))
+        if (!isUserNumber(number))
             throw new IllegalArgumentException(DUPLICATE_ERROR_MESSAGE);
     }
 
@@ -60,11 +67,8 @@ public class Player {
     }
 
     private boolean isUserNumber(String number) {
-        boolean userNumber = getList(number)
-                .stream()
-                .distinct()
-                .count() != number.length();
-        return userNumber;
+        Set<String> userNumber=new HashSet<>(getList(number));
+        return userNumber.size()==number.length();
     }
 
     private List<Integer> converterInteger(String number) {
